@@ -9,13 +9,12 @@ class Robota extends Aggregator
 {
 
     /**
-     * @param string $query
      * @inheritDoc
      */
-    static public function getCount(string $query): int
+    public function getCount(): int
     {
         $client = new Client();
-        $res = $client->get("https://api.rabota.ua/vacancy/search?keyWords=$query&scheduleId=3");
+        $res = $client->get("https://api.rabota.ua/vacancy/search?keyWords=$this->query&scheduleId=3");
         $res = json_decode($res->getBody()->getContents());
 
         Log::info($res->total);

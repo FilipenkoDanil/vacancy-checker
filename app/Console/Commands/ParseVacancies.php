@@ -30,9 +30,18 @@ class ParseVacancies extends Command
      */
     public function handle()
     {
-        Robota::getCount($this->argument('query'));
-        Dou::getCount($this->argument('query'));
-        Djinni::getCount($this->argument('query'));
+        $robota = new Robota($this->argument('query'));
+        $dou = new Dou($this->argument('query'));
+        $djinni = new Djinni($this->argument('query'));
+
+        $aggregators = [$robota, $dou, $djinni];
+        $info = '';
+
+        foreach ($aggregators as $aggregator) {
+            $info .= $aggregator->getInfo() . PHP_EOL;
+        }
+
+        $this->info($info);
 
         return Command::SUCCESS;
     }

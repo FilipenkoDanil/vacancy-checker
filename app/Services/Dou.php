@@ -8,12 +8,11 @@ use Illuminate\Support\Facades\Log;
 class Dou extends Aggregator
 {
     /**
-     * @param string $query
      * @inheritDoc
      */
-    static public function getCount(string $query): int
+    public function getCount(): int
     {
-        $doc = new Document("https://jobs.dou.ua/vacancies/?search=$query", true);
+        $doc = new Document("https://jobs.dou.ua/vacancies/?search=$this->query", true);
         $count = (int)$doc->find('h1')[0]->text();
 
         Log::info($count);

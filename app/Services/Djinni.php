@@ -9,12 +9,11 @@ class Djinni extends Aggregator
 {
 
     /**
-     * @param string $query
      * @inheritDoc
      */
-    static public function getCount(string $query): int
+    public function getCount(): int
     {
-        $query = urlencode($query);
+        $query = urlencode($this->query);
 
         $doc = new Document("https://djinni.co/jobs/?keywords=$query", true);
         $count = (int)$doc->find('h1 span.text-muted')[0]->text();

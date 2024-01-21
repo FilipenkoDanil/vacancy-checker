@@ -4,10 +4,20 @@ namespace App\Services;
 
 abstract class Aggregator
 {
+    public function __construct(protected string $query){}
+
     /**
      * Method returns count of vacancies.
-     * @param string $query
-     * @return mixed
+     * @return int
      */
-    abstract static public function getCount(string $query): int;
+    abstract public function getCount(): int;
+
+    /**
+     * Method returns info about Aggregator - query - vacancy count.
+     * @return string
+     */
+    public function getInfo(): string
+    {
+        return class_basename($this) .  ' - ' . $this->query . ' - ' . $this->getCount() . ' vacancies.';
+    }
 }
