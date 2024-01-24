@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Aggregator extends Model
 {
     use HasFactory;
+
+    protected $table = 'aggregators';
 }

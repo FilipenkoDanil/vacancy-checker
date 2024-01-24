@@ -38,7 +38,11 @@ class ParseVacancies extends Command
         $info = '';
 
         foreach ($aggregators as $aggregator) {
-            $info .= $aggregator->getInfo() . PHP_EOL;
+            try {
+                $info .= $aggregator->analyse();
+            } catch (\Exception $e) {
+                $this->error("Error analyzing {$aggregator->getClassName()}: {$e->getMessage()}");
+            }
         }
 
         $this->info($info);
