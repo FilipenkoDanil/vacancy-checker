@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Vacancy;
 use DiDom\Document;
+use Illuminate\Support\Facades\Log;
 
 class Djinni extends Aggregator
 {
@@ -14,8 +15,8 @@ class Djinni extends Aggregator
     {
         $query = urlencode($this->query);
 
-        $doc = new Document("https://djinni.co/jobs/?keywords=$query", true);
-        $count = (int)$doc->find('h1 span.text-muted')[0]->text();
+        $doc = new Document("https://djinni.co/jobs/?all_keywords=$query", true);
+        $count = (int)$doc->find('span.text-muted')[0]->text();
 
         $this->count = $count;
     }
